@@ -2,133 +2,29 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Halim — Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Halaman Interaktif</title>
+    <style>
+        h1 {
+            color: #2965F1;
+            font-size: 48px;
+        }
+        button {
+            padding: 8px 16px;
+        }
+    </style>
 </head>
 <body>
+    <h1>0</h1>
+    <button>Tambah</button>
 
-<header class="navbar">
-    <div class="container nav-content">
-        <a href="#" class="logo">halim.</a>
-        <nav>
-            <a href="#about">About</a>
-            <a href="#projects">Projects</a>
-            <a href="#skills">Skills</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </div>
-</header>
+    <script>
+        let n = 0;
+        const h1 = document.querySelector("h1");
 
-<main>
-    <section class="hero">
-        <div class="container hero-content">
-            <p class="greeting">Hello, I'm</p>
-            <h1>Muhammad Nurhalim.</h1>
-            <h2>Informatics Student &amp; Future Developer.</h2>
-            <p class="hero-description">
-                I'm currently learning programming, web development,
-                Linux, networking, and building things through hands-on projects.
-            </p>
-            <div class="hero-buttons">
-                <a href="#projects" class="button primary">View My Work</a>
-                <a href="#contact" class="button secondary">Contact Me</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="about" class="section">
-        <div class="container">
-            <p class="section-label">01 — ABOUT</p>
-            <h2 class="section-title">Still learning. Still building.</h2>
-            <div class="about-content">
-                <p>I'm an Informatics student who is interested in technology and how things work behind the screen.</p>
-                <p>I'm currently exploring programming, web development, Linux, networking, and self-hosted projects.</p>
-                <p>I believe the best way to learn is by building, breaking things, and figuring out how to fix them.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="projects" class="section projects-section">
-        <div class="container">
-            <p class="section-label">02 — PROJECTS</p>
-            <h2 class="section-title">Things I've built.</h2>
-
-            <div class="projects-grid">
-                <article class="project-card">
-                    <div class="project-number">01</div>
-                    <h3>Simple Homelab</h3>
-                    <p>A personal homelab using Linux and Docker to learn servers, networking, and self-hosting.</p>
-                    <div class="tags">
-                        <span>Linux</span>
-                        <span>Docker</span>
-                        <span>Networking</span>
-                    </div>
-                    <a href="#" class="project-link">View Project →</a>
-                </article>
-
-                <article class="project-card">
-                    <div class="project-number">02</div>
-                    <h3>Web Project</h3>
-                    <p>A small web project created while learning HTML, CSS, and JavaScript.</p>
-                    <div class="tags">
-                        <span>HTML</span>
-                        <span>CSS</span>
-                        <span>JavaScript</span>
-                    </div>
-                    <a href="#" class="project-link">View Project →</a>
-                </article>
-
-                <article class="project-card">
-                    <div class="project-number">03</div>
-                    <h3>More Coming Soon</h3>
-                    <p>This section will be updated as I build more projects and learn new technologies.</p>
-                    <div class="tags">
-                        <span>Learning</span>
-                        <span>Building</span>
-                    </div>
-                    <a href="#contact" class="project-link">Stay Tuned →</a>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <section id="skills" class="section">
-        <div class="container">
-            <p class="section-label">03 — SKILLS</p>
-            <h2 class="section-title">What I'm learning.</h2>
-
-            <div class="skills-grid">
-                <div class="skill"><span>HTML</span><div class="skill-bar"><div class="skill-progress html"></div></div></div>
-                <div class="skill"><span>CSS</span><div class="skill-bar"><div class="skill-progress css"></div></div></div>
-                <div class="skill"><span>JavaScript</span><div class="skill-bar"><div class="skill-progress javascript"></div></div></div>
-                <div class="skill"><span>Python</span><div class="skill-bar"><div class="skill-progress python"></div></div></div>
-                <div class="skill"><span>Linux</span><div class="skill-bar"><div class="skill-progress linux"></div></div></div>
-                <div class="skill"><span>Docker</span><div class="skill-bar"><div class="skill-progress docker"></div></div></div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="section contact-section">
-        <div class="container">
-            <p class="section-label">04 — CONTACT</p>
-            <h2 class="section-title">Let's connect.</h2>
-            <p class="contact-text">Want to talk about technology, projects, or just say hello?</p>
-            <div class="contact-links">
-                <a href="mailto:your@email.com">Email</a>
-                <a href="https://github.com/" target="_blank">GitHub</a>
-                <a href="https://linkedin.com/" target="_blank">LinkedIn</a>
-            </div>
-        </div>
-    </section>
-</main>
-
-<footer>
-    <div class="container">
-        <p>© <span id="year"></span> Muhammad Nurhalim. Built while learning.</p>
-    </div>
-</footer>
-
-<script src="script.js"></script>
+        document.querySelector("button").onclick = () => {
+            n++;
+            h1.textContent = n;
+        };
+    </script>
 </body>
 </html>

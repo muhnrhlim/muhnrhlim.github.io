@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Data Mahasiswa</title><link rel="stylesheet" href="style.css"></head><body>
+<header class="topbar"><a class="brand" href="index.html">Halim<span>Tech</span></a><nav><a href="kalkulator.html">Kalkulator</a><a href="mahasiswa.html">Array</a><a href="konversi.html">Konversi</a><a class="active" href="database.html">Data Mahasiswa</a></nav></header>
+<main><a class="back" href="index.html">← Kembali ke beranda</a><div class="page-title"><p class="eyebrow">LATIHAN 04 · ADAPTASI GITHUB PAGES</p><h1>Data Mahasiswa</h1><p>Tambah dan tampilkan data mahasiswa. Data disimpan di LocalStorage browser.</p></div>
+<div class="notice" style="margin:0 0 20px"><strong>Penting:</strong> halaman ini bukan koneksi PHP/PDO/MySQL. GitHub Pages tidak menyediakan server PHP. LocalStorage hanya menyimpan data pada browser dan perangkat yang digunakan.</div>
+<section class="panel"><h2>Tambah mahasiswa</h2><form id="studentForm"><div class="field"><label for="nim">NIM</label><input id="nim" maxlength="20" required placeholder="Masukkan NIM"></div><div class="field"><label for="nama">Nama mahasiswa</label><input id="nama" maxlength="100" required placeholder="Masukkan nama"></div><button type="submit">Simpan mahasiswa</button></form><div id="message" aria-live="polite"></div></section>
+<section class="panel" style="margin-top:20px"><h2>Daftar mahasiswa</h2><p>Total mahasiswa: <strong id="count">0</strong></p><div class="table-wrap"><table><thead><tr><th>No</th><th>NIM</th><th>Nama</th><th>Aksi</th></tr></thead><tbody id="rows"></tbody></table></div><button class="secondary" id="clearData" type="button">Hapus semua data</button></section></main><footer>HalimTech · Latihan 04</footer>
+<script>
+const STORAGE_KEY = "halimtech_mahasiswa_v1";
+function loadStudents() {
+  try { const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); return Array.isArray(data) ? data : []; }
+  catch { return []; }
+}
+let students = loadStudents();
+const rows = document.getElementById("rows");
+function showMessage(text, error = false) {
+  const box = document.getElementById("message");
+  box.className = "result" + (error ? " error" : "");
+  box.textContent = text;
+}
+function render() {
+  rows.replaceChildren();
+  document.getElementById("count").textContent = students.length;
+  if (students.length === 0) {
+    const tr = document.createElement("tr"), td = document.createElement("td");
+    td.colSpan = 4; td.className = "kosong"; td.textContent = "Belum ada data mahasiswa.";
+    tr.append(td); rows.append(tr); return;
+  }
+  students.forEach((student, index) => {
+    const tr = document.createElement("tr");
+    [index + 1, student.nim, student.nama].forEach(value => {
+      const td = document.createElement("td"); td.textContent = value; tr.append(td);
+    });
+    const action = document.createElement("td");
+    const del = document.createElement("button"); del.textContent = "Hapus"; del.className = "secondary"; del.style.margin = "0"; del.style.padding = "8px 12px";
+    del.addEventListener("click", () => {
+      students.splice(index, 1); save(); render(); showMessage("Data mahasiswa berhasil dihapus.");
+    });
+    action.append(del); tr.append(action); rows.append(tr);
+  });
+}
+function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(students)); }
+document.getElementById("studentForm").addEventListener("submit", event => {
+  event.preventDefault();
+  const nim = document.getElementById("nim").value.trim();
+  const nama = document.getElementById("nama").value.trim();
+  if (!nim || !nama) return showMessage("NIM dan nama wajib diisi.", true);
+  if (students.some(student => student.nim.toLowerCase() === nim.toLowerCase())) return showMessage("NIM sudah terdaftar.", true);
+  students.push({nim, nama});
+  save(); render(); event.target.reset(); showMessage("Data mahasiswa berhasil ditambahkan.");
+});
+document.getElementById("clearData").addEventListener("click", () => {
+  if (!confirm("Yakin ingin menghapus semua data mahasiswa di browser ini?")) return;
+  students = []; save(); render(); showMessage("Semua data berhasil dihapus.");
+});
+render();
+</script></body></html>
